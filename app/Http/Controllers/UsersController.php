@@ -71,7 +71,7 @@ class UsersController extends Controller
     public function destroy(int $id): RedirectResponse|JsonResponse
     {
         $user = User::findOrFail($id);
-        //$user->delete();
+        $user->delete();
         return response()->json(['message'=>'User deleted successfully']);
     }
 }

@@ -21,18 +21,15 @@ $(document).on('click','#confirmBtn',function(e){
         processData: false,
         success: (response) => {
             if (response) {
-                //alert(response.message);
                 $('#sucess_message_modal .modal-body').html(response.message);
                 new Modal(document.getElementById('sucess_message_modal')).show();
-                window.requestTable = $("#"+deleteModal.referenceTable).dataTable();
-                console.log(window.requestTable);
-                window.requestTable.fnDraw();;
+                window.LaravelDataTables[deleteModal.referenceTable].ajax.reload();
             }
         },
         error: function (response) {
-            console.log(response);
-            $('#file-input-error').text(response.responseJSON.message);
+            $('#error_message_modal .modal-body').html(response.responseJSON.message);
+            new Modal(document.getElementById('error_message_modal')).show();
         }
-    });
+    }); 
     
 });
